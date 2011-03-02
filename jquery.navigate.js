@@ -60,7 +60,7 @@ if (!("console" in window) || !("firebug" in console)) {
 				
 				$(this).addClass('page');
 			});
-			console.log(settings['pageSlideNos']); // Will log the JSON
+			//console.log(settings['pageSlideNos']); // Will log the JSON
 			
 			
 			// Start cycling the main pages
@@ -136,7 +136,7 @@ if (!("console" in window) || !("firebug" in console)) {
 
 function navigate(settings, pages) {
 	if (pages.oldPage != pages.newPage) {
-		console.log('main cycle required');
+		//console.log('main cycle required');
 		
 		// Go to page
 		var slide = settings.pageSlideNos[pages.newPage.replace('#','')];
@@ -176,7 +176,7 @@ function navigate(settings, pages) {
 		
 		
 	} else {
-		console.log('no main cycle');
+		//console.log('no main cycle');
 		if (pages.newSubPage == '') {
 			// Go to first slide
 			$(pages.newPage).children(settings['subpageContainer']).cycle(0);
