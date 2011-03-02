@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>jQuery Navigate</title>
+	<title>Navigate with jQuery</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="Keywords" content="jQuery Navigate dual double layer navigation JavaScript nav plugin addon website site developer">
 	<meta name="Description" content="Dual-layer single page navigation using jQuery">
@@ -24,31 +24,57 @@
 		<a href="#home">Home</a>
 		<a href="#about">About</a>
 		<a href="#gallery">Gallery</a>
+		<a href="#gallery/picture2">Gallery2</a>
 		<a href="#contact">Contact</a>
 		<a href="./">Reload</a>
 	</div>
+	<div id="sidebar">Sidebar</div>
 	<div id="pageContainer">
 		<div id="home">
 			<h1>Home</h1>
 		</div>
 		<div id="about">
 			<h2>About</h2>
+			<div class="submenu">
+				<a href="#about">About</a>
+				<a href="#about/people">People</a>
+			</div>
+			<div class="subpages">
+				<div>
+					About Us
+				</div>
+				<div id="people">
+					Our People
+				</div>
+			</div>
 		</div>
 		<div id="gallery">
 			<h2>Gallery</h2>
 			<div class="submenu">
 				<a href="#gallery">Page1</a>
-				<a href="#gallery/page2">Page2</a>
-				<a href="#gallery/page3">Page3</a>
+				<a href="#gallery/picture2">Page2</a>
+				<a href="#gallery/picture3">Page3</a>
 			</div>
 			<div class="subpages">
-				<div class="subpage mainContent" id="page1">
-					Page1
+				<div id="picture1">
+					Pic 1
 				</div>
-				<div class="subpage" id="page2">
+				<div id="picture2">
+					Pic 2
+				</div>
+				<div id="picture3">
+					Pic 3
+				</div>
+			</div>
+			
+			<div class="subpages">
+				<div id="page1">
+					Page 1
+				</div>
+				<div id="page2">
 					Page 2
 				</div>
-				<div class="subpage" id="page3">
+				<div id="page3">
 					Page 3
 				</div>
 			</div>

@@ -1,5 +1,11 @@
 
 html {background:#edc;}
-body {width:800px;margin:20px auto;}
+body {width:800px;margin:20px auto;font-size:20px;font-family:Helvetica, Arial, Sans-serif;}
+a {text-decoration:none;color:#551A8B;margin:5px;padding:5px;}
 
-.page {width:700px;margin:0 auto;padding:25px 45px;border:5px solid #006;background:#dcd;-moz-border-radius:20px;}
+#nav {margin:10px 0;padding:10px;border:5px solid #99f;background:#dce;-moz-border-radius:20px;}
+#sidebar {float:left;width:160px;height:200px;margin-right:10px;padding:10px;border:5px solid #99f;background:#dce;-moz-border-radius:20px;}
+#pageContainer {margin-left:200px;}
+.page {width:500px;margin:0 auto;padding:25px 45px;border:5px solid #99f;background:#dce;-moz-border-radius:20px;}
+.subpages {float:left;border:2px solid #98b;}
+.subpages div {width:200px;height:30px;border:1px solid #439;}
