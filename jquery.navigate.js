@@ -5,8 +5,6 @@
  * Copyright (c) 2010 Stuart Basden
  * Released under MIT license
  * https://github.com/jquery/jquery/blob/master/MIT-LICENSE.txt
- * 
- * ToDo: submenu entry, event creation, triple layer?
 **/
 
 // Console log debugger (remove)
@@ -126,6 +124,64 @@ if (!("console" in window) || !("firebug" in console)) {
 				}
 			});
 
+			function navigate(settings, pages) {
+				if (pages.oldPage != pages.newPage) {
+					//console.log('main cycle required');
+
+					// Go to page
+					var slide = settings.pageSlideNos[pages.newPage.replace('#','')];
+					settings.selector.cycle(slide);
+
+					// Create subpage cycle
+					if ($(pages.newPage).children(settings['subpageContainer']).length != 0) {
+						$(pages.newPage).children(settings['subpageContainer']).cycle(settings['subCycle']).addClass('cycling');
+
+						// Get the subpages index
+						var j = 0;
+						$(pages.newPage).children(settings['subpageContainer']).children().each(function() {
+							var id = $(this).attr('id');
+							//console.log(id); // Will log all pages IDs
+							settings.subpageSlideNos[id] = j;
+							j++;
+
+							$(this).addClass('subpage');
+						});
+						//console.log(settings['subpageSlideNos']); // Will log the JSON
+
+					}
+
+
+					// Go to subpage
+					if (pages.newSubPage != '') {
+						goToSubPage(settings, pages);
+					}
+
+
+					// Destroy oldpage subpage cycle
+					if ($(pages.oldPage).children(settings['subpageContainer']).length != 0) {
+						$(pages.oldPage+' '+settings['subpageContainer']).cycle('destroy');
+					}
+
+
+
+
+				} else {
+					//console.log('no main cycle');
+					if (pages.newSubPage == '') {
+						// Go to first slide
+						$(pages.newPage).children(settings['subpageContainer']).cycle(0);
+					} else {
+						goToSubPage(settings, pages);
+					}
+				}
+			}
+
+			function goToSubPage(settings, pages) {
+				var subslide = settings.subpageSlideNos[pages.newSubPage];
+				$(pages.newPage).children(settings['subpageContainer']).cycle(subslide);
+			}
+
+
 		});
 
   };
@@ -134,62 +190,7 @@ if (!("console" in window) || !("firebug" in console)) {
 
 
 
-function navigate(settings, pages) {
-	if (pages.oldPage != pages.newPage) {
-		//console.log('main cycle required');
-		
-		// Go to page
-		var slide = settings.pageSlideNos[pages.newPage.replace('#','')];
-		settings.selector.cycle(slide);
 
-		// Create subpage cycle
-		if ($(pages.newPage).children(settings['subpageContainer']).length != 0) {
-			$(pages.newPage).children(settings['subpageContainer']).cycle(settings['subCycle']).addClass('cycling');
-			
-			// Get the subpages index
-			var j = 0;
-			$(pages.newPage).children(settings['subpageContainer']).children().each(function() {
-				var id = $(this).attr('id');
-				//console.log(id); // Will log all pages IDs
-				settings.subpageSlideNos[id] = j;
-				j++;
-
-				$(this).addClass('subpage');
-			});
-			//console.log(settings['subpageSlideNos']); // Will log the JSON
-
-		}
-		
-		
-		// Go to subpage
-		if (pages.newSubPage != '') {
-			goToSubPage(settings, pages);
-		}
-		
-		
-		// Destroy oldpage subpage cycle
-		if ($(pages.oldPage).children(settings['subpageContainer']).length != 0) {
-			$(pages.oldPage+' '+settings['subpageContainer']).cycle('destroy');
-		}
-		
-		
-		
-		
-	} else {
-		//console.log('no main cycle');
-		if (pages.newSubPage == '') {
-			// Go to first slide
-			$(pages.newPage).children(settings['subpageContainer']).cycle(0);
-		} else {
-			goToSubPage(settings, pages);
-		}
-	}
-}
-
-function goToSubPage(settings, pages) {
-	var subslide = settings.subpageSlideNos[pages.newSubPage];
-	$(pages.newPage).children(settings['subpageContainer']).cycle(subslide);
-}
 
 
 /*
