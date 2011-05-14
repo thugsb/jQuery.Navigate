@@ -16,3 +16,8 @@ Submenu animate entry option
 event creation
 Triple layer?
 Cycle SlideExpr option
+
+
+ChangeLog:
+2011-05-14 Stuart Basden <stu@t.REMOVEapio.ca>
+	* jquery.navigate.js : Added test for existence of hash IDs

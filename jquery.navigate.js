@@ -1,5 +1,5 @@
 /**
- * jQuery.navigate v 0.2 - 2nd March 2011
+ * jQuery.navigate v 0.8 - 14th May 2011
  * navigate.apio.ca
  * 
  * Copyright (c) 2010 Stuart Basden
@@ -45,9 +45,7 @@ if (!("console" in window) || !("firebug" in console)) {
 			settings.pageSlideNos = {};
 			settings.subpageSlideNos = {};
 			
-			var home = '';
-			
-			var i = 0;
+			var home = '', i = 0, pages = {};
 			// Get the pages 
 			$(this).children().each(function() {
 				var id = $(this).attr('id');
@@ -69,27 +67,29 @@ if (!("console" in window) || !("firebug" in console)) {
 			if (window.location.hash == '') {
 				window.location.hash = '#'+home.charAt(0).toUpperCase() + home.slice(1);
 			}
-			var pages = {
-				'oldPage' : '',
-				'newPage' : window.location.hash.toLowerCase(),
-				'oldSubPage' : '',
-				'newSubPage' : ''
-			};
-			if (pages.newPage.indexOf('/') !=-1) {					
-				var hashArray = pages.newPage.split('/');
-				pages.newPage = hashArray[0];
-				pages.newSubPage = hashArray[1];
-				//console.log(pages.newPage, pages.newSubPage);
-			}
+
+			getPages();
+
+			// Test the page exists
+			if ($(pages.newPage).length != 1) {window.location.hash = '#'+home.charAt(0).toUpperCase() + home.slice(1);getPages();}
+			if (pages.newSubPage && $('#'+pages.newSubPage).length != 1) {window.location.hash = '#'+pages.newPage.charAt(1).toUpperCase() + pages.newPage.slice(2);getPages();}
+			
 			navigate(settings, pages);
 			
 			// Force main page to appear instantly and not cycle in (not sure why this works)
 			if (settings.instantLoad) {
 				navigate(settings, pages);
-			}		
+			}
 			
 			// Detect hash change and navigate
 			$(window).hashchange( function(){
+				// Test the page exists
+				var existsTest = window.location.hash.toLowerCase(), existsArray = [existsTest];
+				if (existsTest.indexOf('/') !=-1) {					
+					existsArray = existsTest.split('/');
+				}
+				if ($(existsArray[0]).length != 1) {return false;}
+				if (existsArray[1] && $('#'+existsArray[1]).length != 1) {return false;}
 				pages = {
 					'oldPage' : pages.newPage,
 					'newPage' : window.location.hash.toLowerCase(),
@@ -104,8 +104,8 @@ if (!("console" in window) || !("firebug" in console)) {
 				//console.log(pages);
 				navigate(settings, pages);
 			});
-			
-			
+
+
 			$('a').click(settings,function() {
 				
 				if ($(this).attr('href').charAt(0) == '#') {
@@ -123,6 +123,21 @@ if (!("console" in window) || !("firebug" in console)) {
 					return true;
 				}
 			});
+
+			function getPages() {
+				pages = {
+					'oldPage' : '',
+					'newPage' : window.location.hash.toLowerCase(),
+					'oldSubPage' : '',
+					'newSubPage' : ''
+				};
+				if (pages.newPage.indexOf('/') !=-1) {					
+					var hashArray = pages.newPage.split('/');
+					pages.newPage = hashArray[0];
+					pages.newSubPage = hashArray[1];
+					//console.log(pages.newPage, pages.newSubPage);
+				}
+			}
 
 			function navigate(settings, pages) {
 				if (pages.oldPage != pages.newPage) {
