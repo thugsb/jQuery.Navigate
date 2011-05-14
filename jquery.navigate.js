@@ -71,8 +71,8 @@ if (!("console" in window) || !("firebug" in console)) {
 			getPages();
 
 			// Test the page exists
-			if ($(pages.newPage).length != 1) {window.location.hash = '#'+home.charAt(0).toUpperCase() + home.slice(1);getPages();}
-			if (pages.newSubPage && $('#'+pages.newSubPage).length != 1) {window.location.hash = '#'+pages.newPage.charAt(1).toUpperCase() + pages.newPage.slice(2);getPages();}
+			if ($(settings.selector).children(pages.newPage).length != 1) {window.location.hash = '#'+home.charAt(0).toUpperCase() + home.slice(1);getPages();}
+			if (pages.newSubPage && $(pages.newPage).children('#'+pages.newSubPage).length != 1) {window.location.hash = '#'+pages.newPage.charAt(1).toUpperCase() + pages.newPage.slice(2);getPages();}
 			
 			navigate(settings, pages);
 			
@@ -88,8 +88,8 @@ if (!("console" in window) || !("firebug" in console)) {
 				if (existsTest.indexOf('/') !=-1) {					
 					existsArray = existsTest.split('/');
 				}
-				if ($(existsArray[0]).length != 1) {return false;}
-				if (existsArray[1] && $('#'+existsArray[1]).length != 1) {return false;}
+				if ($(settings.selector).children(existsArray[0]).length != 1) {return false;}
+				if (existsArray[1] && $(existsArray[0]).children(settings.subpageContainer).children('#'+existsArray[1]).length != 1) {return false;}
 				pages = {
 					'oldPage' : pages.newPage,
 					'newPage' : window.location.hash.toLowerCase(),
