@@ -8,8 +8,8 @@ The structure of the HTML must be as shown on the <a href="http://navigate.tapio
 
 jQuery.Navigate requires <a href="http://jquery.malsup.com/cycle/">jQuery.cycle</a> and <a href="http://benalman.com/projects/jquery-hashchange-plugin/">jQuery.hashchange</a>. Thanks to Malsup and Ben Alman for maintaining these excellent plugins.
 
-
 To do:
+
 * Stop uppercase IDs failing
 * Alternative to charat(0) uppercase
 * Submenu animate entry option
