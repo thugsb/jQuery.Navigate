@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jQuery.Navigate Dual Layer Navigation</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="Keywords" content="jQuery Navigate dual double layer navigation JavaScript nav plugin addon website site developer">
+	<meta name="Description" content="Dual-layer single page navigation using jQuery">
+
+	<style type="text/css">
+	
+	html {background:#edc;}
+	body {width:800px;margin:20px auto;font-size:20px;font-family:Helvetica, Arial, Sans-serif;}
+	a {text-decoration:none;color:#551A8B;}
+
+	#nav {height:3em;margin:10px 0;padding:10px;border:5px solid #99f;background:#dce;-moz-border-radius:20px;}
+	#nav li {float:left;list-style:none;}
+	#nav a {margin:5px;padding:5px;}
+	#sidebar {float:left;width:160px;height:200px;margin-right:10px;padding:10px;border:5px solid #99f;background:#dce;-moz-border-radius:20px;}
+	#pageContainer {margin-left:200px;}
+	.page {width:500px;margin:0 auto;padding:25px 45px;border:5px solid #99f;background:#dce;-moz-border-radius:20px;}
+	.submenu a {margin-right:20px;}
+	.submenu {margin:0 0 20px;}
+	.subpages {width:300px;height:200px;border:2px solid #98b;}
+	.subpages div {border:1px solid #439;}
+	.subpages img {display:block;}
+	</style>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="jquery.cycle.all.min.js"></script>
+	<script type="text/javascript" src="jquery.navigate.min.js"></script>
+	
+	<script type="text/javascript">
+	
+	jQuery(document).ready(function($) {
+		$('#pageContainer').navigate();
+	});
+	
+	</script>
+	
+</head>
+<body>
+	<ul id="nav">
+		<li><a href="#home">Home</a></li>
+		<li><a href="#about">About</a></li>
+		<li><a href="#gallery">Gallery</a><br>
+			<a href="#gallery/picture2"><small>Gallery2</small></a><br>
+			<a href="#gallery/picture3"><small>Gallery3</small></a>
+		</li>
+		<li><a href="#contact">Contact</a></li>
+		
+	</ul>
+	<div id="sidebar">Sidebar</div>
+	<div id="pageContainer">
+		<div id="home">
+			<h1>Home</h1>
+		</div>
+		<div id="about">
+			<h2>About</h2>
+		</div>
+		<div id="gallery">
+			<h2>Gallery</h2>
+			<div class="submenu">
+				<a href="#gallery">Picture 1</a>
+				<a href="#gallery/picture2">Picture 2</a>
+				<a href="#gallery/picture3">Picture 3</a>
+			</div>
+			<div class="subpages">
+				<div id="picture1">
+					<img src="images/tree1.jpg" alt="Tree1">
+				</div>
+				<div id="picture2">
+					<img src="images/tree2.jpg" alt="Tree2">
+				</div>
+				<div id="picture3">
+					<img src="images/tree3.jpg" alt="Tree3">
+				</div>
+			</div>
+			<p>Images from <a href="http://www.freefoto.com/">FreeFoto.com</a>.</p>
+		</div>
+		<div id="contact">
+			<h2>Contact</h2>
+		</div>
+	</div>
+</body>
+</html>

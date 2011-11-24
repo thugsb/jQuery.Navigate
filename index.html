@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jQuery.Navigate - Dual Layer Navigation</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="Keywords" content="jQuery Navigate dual double layer navigation JavaScript nav plugin addon website site developer cycle hash hashchange">
+	<meta name="Description" content="Dual-layer single page navigation using jQuery">
+
+	<style type="text/css">
+	
+	html {background:#000;}
+	body {margin:0;padding:40px 0 20px;font-size:16px;font-family:Helvetica, Arial, Sans-serif;background:#21293D;
+		background:-moz-linear-gradient(center top , #21293D, #000) no-repeat;
+		background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#21293D), to(#000));
+		-moz-box-shadow: inset 0 0 50px 5px #000;
+		-webkit-box-shadow: inset 0 0 50px 5px #000;
+		box-shadow: inset 0 0 50px 5px #000;}
+	#wrapper {width:800px;margin:0px auto;padding:20px 50px;background:#edeac2;
+		-moz-box-shadow: inset 0 0 10px 7px #998, 0 0 50px 5px #000;
+		-webkit-box-shadow: inset 0 0 10px 7px #998, 0 0 50px 5px #000;
+		box-shadow: inset 0 0 10px 7px #998, 0 0 50px 5px #000;
+		-moz-border-radius:40px;-webkit-border-radius:40px;border-radius:40px;}
+	a {text-decoration:none;color:#666;}
+	a:visited {color:#444;}
+	a:hover {color:#777;text-decoration:underline;text-shadow: 2px 2px 8px #999;}
+	.column {display:inline-block;zoom:1;*display:block;vertical-align:top;}
+	.first {margin-right:60px;}
+	hr {height:3px;border:none;color:#21293D;background:#21293D;}
+	
+	#logo {font-size:300%;color:#21293D;color:rgba(51,135,204,0.3);text-shadow: 0px -2px 2px #21293D, 0px -5px 8px #21293D, 0px -8px 18px #3387CC;}
+	#download {float:right;text-align:right;}
+	#intro {line-height:1.5em;}
+	
+	.html {width:320px;padding:5px;overflow:hidden;}
+	.half {height:180px;}
+	#dependencies {height:3.5em;}
+	#method {height:5.5em;}
+	#structure {}
+	#nav {}
+	
+	textarea, pre {overflow-x: auto;padding: 15px;border:solid #21293D;border-width: 1px 1px 1px 5px;font-size: small;color:#E0C587;background:#21293D;
+		background:-moz-linear-gradient(center top , #000, #21293D);
+		background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#000), to(#21293D));
+		-moz-box-shadow: 0 0 2px 2px #21293D;
+		-webkit-box-shadow: 0 0 2px 2px #21293D;
+		box-shadow: 0 0 2px 2px #21293D;}
+	.string {color:#65A731;}
+	.com {color:#888;}
+	.number {color:#66f;}
+	.json {color:teal;}
+	.tag {color:#3387CC;}
+	
+	ul {padding-left:40px;}
+	ul.raquo {list-style:none;padding-left:26px;}
+	ul.raquo li:before {content: "» ";}
+	</style>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js" type="text/javascript"></script>
+
+</head>
+<body>
+	<div id="wrapper">
+		<div id="download">
+			<a href="jquery.navigate.zip">Download zip</a><br>
+			<a href="jquery.navigate.min.js">View JS</a> <a target="_blank" href="http://jquery.malsup.com/cycle/">(requires $.cycle)</a><br>
+			<a target="_blank" href="https://github.com/thugsb/jQuery.Navigate">Git Me Up</a><br>
+			<a target="_blank" href="http://plugins.jquery.com/project/navigate">On $.com</a>
+		</div>
+		<h1 id="logo">jQuery.Navigate</h1>
+		<div id="content">
+			<p id="intro">jQuery.Navigate simplifies single-page navigation, allowing for dual-layered content to be present elegantly and quickly. It allows entire (small) sites to be constructed as a single page, or larger sites to display masses of content in a user-friendly way.</p>
+			<div class="column first">
+				<h2>1. Set up Dependencies</h2>
+				<pre class="html" readonly="readonly" id="dependencies">
+&lt;script src=<span class="string">"http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"</span> type=<span class="string">"text/javascript"</span>&gt;&lt;/script&gt;
+&lt;script src=<span class="string">"jquery.cycle.all.min.js"</span> type=<span class="string">"text/javascript"</span>&gt;&lt;/script&gt;
+&lt;script src=<span class="string">"jquery.navigate.js"</span> type=<span class="string">"text/javascript"</span>&gt;&lt;/script&gt;
+				</pre>
+			</div><div class="column second">
+				<h2>2. Call the Method</h2>
+				<pre class="html" readonly="readonly" id="method">
+&lt;script type=<span class="string">"text/javascript"</span>&gt;
+jQuery(document).ready(function($) {
+  $(<span class="string">'#pageContainer'</span>).navigate();
+});
+&lt;/script&gt;
+				</pre>
+			</div>
+			<div class="column first">
+				<h2>3. Set up your Page</h2>
+				<pre class="html half" readonly="readonly" id="structure">
+<span class="tag">&lt;div id=<span class="string">"pageContainer"</span>&gt;</span>
+  <span class="tag">&lt;div id=<span class="string">"home"</span>&gt;</span>
+    <span class="tag">&lt;h1&gt;Home&lt;/h1&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;div id=<span class="string">"gallery"</span>&gt;</span>
+    <span class="tag">&lt;h2&gt;Gallery&lt;/h2&gt;</span>
+    <span class="tag">&lt;div class=<span class="string">"subpages"</span>&gt;</span>
+      &lt;img id=<span class="string">"picture1"</span> src=<span class="string">"images/tree1.jpg"</span> alt=<span class="string">"Tree1"</span>&gt;
+      &lt;img id=<span class="string">"picture2"</span> src=<span class="string">"images/tree2.jpg"</span> alt=<span class="string">"Tree2"</span>&gt;
+      &lt;img id=<span class="string">"picture3"</span> src=<span class="string">"images/tree3.jpg"</span> alt=<span class="string">"Tree3"</span>&gt;
+    <span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+				</pre>
+			</div><div class="column second">
+				<h2>4. Include your Nav</h2>
+				<pre class="html half" readonly="readonly" >
+<span class="tag">&lt;ul id=<span class="string">"nav"</span>C&gt;</span>
+  <span class="tag">&lt;li&gt;</span>&lt;a href=<span class="string">"#home"</span>&gt;Home&lt;/a&gt;<span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;li&gt;</span>&lt;a href=<span class="string">"#gallery"</span>&gt;Gallery&lt;/a&gt;
+    <span class="tag">&lt;ul&gt;</span>
+      <span class="tag">&lt;li&gt;</span>&lt;a href=<span class="string">"#gallery/picture1"</span>&gt;Picture 1&lt;/a&gt;<span class="tag">&lt;/li&gt;</span>
+      <span class="tag">&lt;li&gt;</span>&lt;a href=<span class="string">"#gallery/picture2"</span>&gt;Picture 2&lt;/a&gt;<span class="tag">&lt;/li&gt;</span>
+      <span class="tag">&lt;li&gt;</span>&lt;a href=<span class="string">"#gallery/picture3"</span>&gt;Picture 3&lt;/a&gt;<span class="tag">&lt;/li&gt;</span>
+    <span class="tag">&lt;/ul&gt;</span>
+  <span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ul&gt;</span>
+				</pre>
+			</div>
+			<h2><a target="_blank" href="./examples/index.html">&raquo; The result</a></h2>
+			<hr>
+			<h2 id="options">Options and Defaults</h2>
+			<pre>
+$(element).navigate({
+  'instantLoad'        : <span class="number">0</span> <span class="com">// Set to 1 for the main page to appear initially without cycling</span>
+  'mainCycle'          : {<span class="json">fx:'blindX',timeout:0</span>}, <span class="com">// <a target="_blank" href="http://jquery.malsup.com/cycle/options.html">jQuery.cycle JSON settings</a>. Remember timeout:0</span>
+  'subCycle'           : {<span class="json">fx:'blindY',timeout:0</span>}, <span class="com">// <a target="_blank" href="http://jquery.malsup.com/cycle/options.html">jQuery.cycle JSON settings</a>. Remember timeout:0</span>
+  'subpageContainer'   : <span class="string">'.subpages'</span>, <span class="com">// Selector for container of subpages</span>
+});
+			</pre>
+			
+			<h2 id="notes">Notes</h2>
+			<p>The structure of the HTML must be as the above:</p>
+			<ul>
+				<li>IDs of elements must be <strong>lowercase</strong>. I hope to remove this limitation with future releases.</li>
+				<li>The first character of the IDs must be a letter (not a number).</li>
+				<li>The first child elements within #pageContainer <small>(or whatever element is called for navigating)</small> must contain the IDs for the first layer of navigation.</li>
+				<li>The first child elements within the .subpages <small>(or whatever you set as the subpageContainer)</small> will be the IDs for the second layer of navigation <small>(not yet tested with the jQuery.cycle slideExpr option)</small>.</li>
+				<li>Links should have the format href="#pageID/subpageID" or just href="#pageID". You cannot call directly to href="#subpageID" as this will break the page.</li>
+			</ul>
+			<p>This plugin is based on the robust and flexible <a target="_blank" href="http://jquery.malsup.com/cycle/">jQuery.Cycle</a>, and the solid <a target="_blank" href="http://benalman.com/projects/jquery-hashchange-plugin/">jQuery.hashchange</a> (included). Thanks to Malsup and Ben Alman for maintaining these excellent plugins.</p>
+			<p>Compatible with jQuery 1.2.6+, jQuery.Navigate is tested on Firefox, Webkit and ie6-9 browsers.</p>
+			
+			<h3>Other examples</h3>
+			<ul class="raquo">
+				<li><a target="_blank" href="./examples/basic.html">Basic (single layer) example</a></li>
+				<li><a target="_blank" href="./examples/subpages.html">Simple dual-layer example</a></li>
+				<li><a target="_blank" href="./examples/two-subpages.html">Two subpages in a single page</a></li>
+			</ul>
+		</div>
+	</div>
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-9300781-4']);
+	  _gaq.push(['_setDomainName', '.tapiocacollective.com']);
+	  _gaq.push(['_trackPageview']);
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+</body>
+</html>
